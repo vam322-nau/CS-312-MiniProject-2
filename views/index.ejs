@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drink Recipe Finder</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Drink Recipe Finder 🍹</h1>
+    <p>Search for a drink recipe!</p>
+
+    <form action="/search" method="POST">
+      <input
+        type="text"
+        name="drinkName"
+        placeholder="Enter a drink..."
+        required
+      >
+
+      <button type="submit">Search</button>
+    </form>
+    <% if (error) { %>
+        <p class="error"><%= error %></p>
+    <% } %>
+
+    <% if (drink) { %>
+    <div class="drink-card">
+
+        <h2><%= drink.strDrink %></h2>
+
+        <img
+        src="<%= drink.strDrinkThumb %>"
+        alt="<%= drink.strDrink %>"
+        class="drink-image"
+        >
+
+        <h3>Ingredients</h3>
+
+        <ul>
+          <% for (let i = 1; i <= 15; i++) { %>
+
+            <% if (drink["strIngredient" + i]) { %>
+          <li>
+                <%= drink["strMeasure" + i] || "" %>
+                <%= drink["strIngredient" + i] %>
+          </li>
+        <% } %>
+
+      <% } %>
+    </ul>
+
+        <h3>Instructions</h3>
+
+        <p><%= drink.strInstructions %></p>
+
+        </div>
+    <% } %>
+
+  </div>
+
+</body>
+</html>
